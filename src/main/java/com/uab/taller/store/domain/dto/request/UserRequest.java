@@ -11,6 +11,6 @@ public class UserRequest {
     String email;
     String password;
 
-    
+
 
 }
