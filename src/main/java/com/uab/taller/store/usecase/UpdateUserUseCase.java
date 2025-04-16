@@ -7,17 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CreateUserUseCase {
+public class UpdateUserUseCase {
 
     @Autowired
     IUserService userService;
 
-    public User execute(UserRequest userRequest) {
-
-        User user = new User();
-        user.setName(userRequest.getName());
-        user.setPassword(userRequest.getPassword());
-        user.setEmail(userRequest.getEmail());
-        return  userService.save(user);
+    public User execute(Long id, UserRequest userRequest) {
+        User userToUpdate = userService.getById(id);
+        userToUpdate.setName(userRequest.getName());
+        userToUpdate.setEmail(userRequest.getEmail());
+        userToUpdate.setPassword(userRequest.getPassword());
+        return userService.save(userToUpdate);
     }
 }

@@ -4,10 +4,7 @@ package com.uab.taller.store.controller;
 import com.uab.taller.store.domain.User;
 import com.uab.taller.store.domain.dto.request.UserRequest;
 import com.uab.taller.store.service.IUserService;
-import com.uab.taller.store.usecase.CreateUserUseCase;
-import com.uab.taller.store.usecase.DeleteUserUseCase;
-import com.uab.taller.store.usecase.GetAllUsersUseCase;
-import com.uab.taller.store.usecase.GetUserByIdUseCase;
+import com.uab.taller.store.usecase.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,13 +19,14 @@ public class  UserController {
 
     @Autowired
     GetAllUsersUseCase getAllUsersUseCase;
-
     @Autowired
     GetUserByIdUseCase getUserByIdUseCase;
     @Autowired
     CreateUserUseCase createUserUseCase;
     @Autowired
     DeleteUserUseCase deleteUserUseCase;
+    @Autowired
+    UpdateUserUseCase updateUserUseCase;
 
     @GetMapping()
     public List<User> getAll() {
@@ -46,14 +44,11 @@ public class  UserController {
     }
     @PostMapping("")
     public User save(@RequestBody UserRequest userRequest) {
-
-        User user = new User();
-        user.setName(userRequest.getName());
-        user.setLastName(userRequest.getLastName());
-        user.setEmail(userRequest.getEmail());
-        user.setPassword(userRequest.getPassword());
-        return createUserUseCase.execute(user);
+        return createUserUseCase.execute(userRequest);
     }
 
-
+    @PutMapping("/{id}")
+    public User update(@PathVariable long id, @RequestBody UserRequest userRequest) {
+        return updateUserUseCase.execute(id,userRequest);
+    }
 }
