@@ -1,4 +1,4 @@
-package com.uab.taller.store.usecase;
+package com.uab.taller.store.usecase.user;
 
 import com.uab.taller.store.domain.User;
 import com.uab.taller.store.domain.dto.request.UserRequest;
@@ -14,7 +14,6 @@ public class UpdateUserUseCase {
 
     public User execute(Long id, UserRequest userRequest) {
         User userToUpdate = userService.getById(id);
-        userToUpdate.setName(userRequest.getName());
         userToUpdate.setEmail(userRequest.getEmail());
         userToUpdate.setPassword(userRequest.getPassword());
         return userService.save(userToUpdate);

@@ -1,10 +1,8 @@
 package com.uab.taller.store.controller;
 
 import com.uab.taller.store.domain.Profile;
-import com.uab.taller.store.domain.User;
 import com.uab.taller.store.domain.dto.request.ProfileRequest;
-import com.uab.taller.store.domain.dto.request.UserRequest;
-import com.uab.taller.store.usecase.*;
+import com.uab.taller.store.usecase.profile.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +44,8 @@ public class ProfileController {
     public void deleteById(@PathVariable Long userId) {
         deleteProfileUseCase.execute(userId);
     }
+
+
     @PostMapping("")
     public Profile save(@RequestBody ProfileRequest profileRequest) {
         return createProfileUseCase.execute(profileRequest);
